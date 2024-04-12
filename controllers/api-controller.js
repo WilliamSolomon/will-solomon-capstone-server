@@ -1,15 +1,41 @@
 const { log } = require("console");
 const fs = require("fs");
 
-const getAllUsers = async (_req, res) => {
+const getAllUserAlert = async (_req, res) => {
     try {
-        const usersData = fs.readFileSync("./data/user-details.json");
-        const parsedData = JSON.parse(usersData);
-        res.status(200).json(parsedData);
+        const userId = req.params.id;
+        const alertsData = fs.readFileSync("./data/alert-details.json");
+        const parsedData = JSON.parse(alertsData);
+
+        //Filter for specific user
+        const userAlerts = parsedData.filter(alert => alert.user_id === userId);
+
+        res.status(200).json(userAlerts);
     } catch (err) {
-        res.status(400).send(`Error retrieving Users: ${err}`)
+        res.status(400).send(`Error retrieving user(${req.params.id}) alerts: ${err}`)
     }
 }
+
+
+const addWarehouse = async (req, res) => {
+    try {
+        const { warehouse_name, address, country, city, contact_name, contact_position, contact_phone, contact_email } = req.body;
+        const newWarehouse = await knex('warehouses')
+            .insert({
+                warehouse_name, address, country, city, contact_name, contact_position, contact_phone, contact_email
+            })
+
+        res.status(201).json(newWarehouse);
+    } catch (error) {
+        res.status(500).json({
+            message: `Unable to add new warehouse: ${error}`,
+        });
+    }
+};
+
+
+
+
 
 const getUser = async (req, res) => {
 
@@ -28,23 +54,6 @@ const getUser = async (req, res) => {
 
     res.status(200).json(user);
 }
-
-// const getUserOrders = async (req, res) => {
-//     try {
-//         // const inventories = await knex("inventories")
-//         //     .where({ warehouse_id: req.params.id })
-//         if (orders.length === 0) {
-//             return res.status(404).json({
-//                 message: `No orders found for warehouse with ID ${req.params.id}`
-//             });
-//         }
-//         res.json(orders);
-//     } catch (error) {
-//         res.status(500).json({
-//             message: `Unable to retrieve inventories for warehouse with ID ${req.params.userId}`,
-//         });
-//     }
-// };
 
 
 const getAllProducts = async (_req, res) => {
@@ -89,9 +98,5 @@ const getProductItem = async (req, res) => {
 
 
 module.exports = {
-    getAllUsers,
-    getUser,
-    // getUserOrders,
-    getAllProducts,
-    getProductItem
+    getAllUserAlert
 };

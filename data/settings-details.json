@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "user_id": "1",
+        "category": "weather_type",
+        "condition": "cloudy",
+        "status": "active",
+        "specified_date": null,
+        "created_at": "2024-04-01T10:00:00-04:00"
+    },
+    {
+        "id": "2",
+        "user_id": "1",
+        "category": "specific_day",
+        "condition": "fog",
+        "status": "active",
+        "specified_date": "2024-04-01T10:00:00-04:00",
+        "created_at": "2024-04-01T10:00:00-04:00"
+    }
+]

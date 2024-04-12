@@ -3,25 +3,24 @@ const apiController = require("../controllers/api-controller");
 
 
 router
-    .route("/users")
-    .get(apiController.getAllUsers)
-
-router 
-    .route("/users/:id")
-    .get(apiController.getUser)
-
-// router
-//     .route("/users/:id/orders")
-//     .get(apiController.getUserOrders)
+    .route("/alerts/user/:id")
+    .get(apiController.getAllUserAlerts)
 
 router
-    .route("/products")
-    .get(apiController.getAllProducts)
-
+    .route("/alerts/:id/")
+    .post(apiController.addAlert)
+    .put(apiController.editAlert)
+    .delete(apiController.removeAlert)
 
 router
-    .route("/products/:id")
-    .get(apiController.getProductItem)
+    .route("/settings/user/:id")
+    .get(apiController.getUserAlertSettings)
+
+router
+    .route("/settings/:id/")
+    .post(apiController.addAlertSetting)
+    .put(apiController.editAlertSetting)
+    .delete(apiController.removeAlertSetting)
 
 module.exports = router;
 
