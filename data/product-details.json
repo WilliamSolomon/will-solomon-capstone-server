@@ -1,0 +1,162 @@
+[
+    {
+        "id": "1",
+        "productName": "Women's Waterproof Rain Jacket",
+        "description": "Durable and stylish waterproof rain jacket designed for outdoor activities in wet conditions.",
+        "category": "Apparel & Accessories",
+        "price": 89.99,
+        "stock": 100,
+        "brand": "Columbia",
+        "color": "Blue",
+        "size": "Multiple sizes available",
+        "material": "Nylon shell with waterproof membrane",
+        "weather": "Rain",
+        "image": "http://localhost:8080/images/image0.jpg",
+        "weight": "Lightweight",
+        "dimensions": {
+            "length": "Varies by size",
+            "width": "Varies by size",
+            "height": "Varies by size"
+        }
+    },
+    {
+        "id": "2",
+        "productName": "Women's Lightweight Jacket",
+        "description": "Stylish and breathable lightweight jacket perfect for cool mornings and evenings in Miami.",
+        "category": "Apparel & Accessories",
+        "weather": "Clouds",
+        "image": "http://localhost:8080/images/image1.jpg",
+        "price": 69.99,
+        "stock": 100,
+        "brand": "Patagonia",
+        "color": "Gray",
+        "size": "Multiple sizes available",
+        "material": "Polyester blend",
+        "weight": "Lightweight",
+        "dimensions": {
+            "length": "Varies by size",
+            "width": "Varies by size",
+            "height": "Varies by size"
+        }
+    },
+    {
+        "id": "3",
+        "productName": "Women's Long Sleeve T-Shirt",
+        "description": "Soft and comfortable long sleeve t-shirt suitable for layering during cool evenings in Miami.",
+        "category": "Apparel & Accessories",
+        "weather": "Clouds",
+        "image": "http://localhost:8080/images/image3.jpg",
+        "price": 29.99,
+        "stock": 80,
+        "brand": "Nike",
+        "color": "Black",
+        "size": "Multiple sizes available",
+        "material": "Cotton blend",
+        "weight": "Lightweight",
+        "dimensions": {
+            "length": "Varies by size",
+            "width": "Varies by size",
+            "height": "Varies by size"
+        }
+    },
+    {
+        "id": "4",
+        "productName": "Women's Capri Leggings",
+        "description": "Stretchy and moisture-wicking capri leggings perfect for outdoor activities in cool Miami weather.",
+        "category": "Apparel & Accessories",
+        "weather": "Clouds",
+        "image": "http://localhost:8080/images/image4.jpg",
+        "price": 39.99,
+        "stock": 70,
+        "brand": "Lululemon",
+        "color": "Blue",
+        "size": "Multiple sizes available",
+        "material": "Nylon and spandex blend",
+        "weight": "Lightweight",
+        "dimensions": {
+            "length": "Varies by size",
+            "width": "Varies by size",
+            "height": "Varies by size"
+        }
+    },
+    {
+        "id": "5",
+        "productName": "Women's Pullover Hoodie",
+        "description": "Cozy and lightweight pullover hoodie perfect for casual outings on cool days in Miami.",
+        "category": "Apparel & Accessories",
+        "weather": "Clouds",
+        "image": "http://localhost:8080/images/image5.jpg",
+        "price": 49.99,
+        "stock": 60,
+        "brand": "Adidas",
+        "color": "Gray",
+        "size": "Multiple sizes available",
+        "material": "Cotton and polyester blend",
+        "weight": "Lightweight",
+        "dimensions": {
+            "length": "Varies by size",
+            "width": "Varies by size",
+            "height": "Varies by size"
+        }
+    },
+    {
+        "id": "6",
+        "productName": "Women's Waterproof Backpack",
+        "description": "Versatile and waterproof backpack designed for outdoor adventures, with multiple compartments for organization.",
+        "category": "Bags & Luggage",
+        "price": 69.99,
+        "stock": 50,
+        "brand": "The North Face",
+        "color": "Purple",
+        "size": "One size",
+        "material": "Durable nylon with waterproof coating",
+        "weather": "Rain",
+        "image": "http://localhost:8080/images/image5.jpg",
+        "weight": "Lightweight",
+        "dimensions": {
+            "length": "18 inches",
+            "width": "12 inches",
+            "height": "6 inches"
+        }
+    },
+    {
+        "id": "7",
+        "productName": "Women's Waterproof Hiking Boots",
+        "description": "Sturdy and waterproof hiking boots with grippy outsoles for traction in wet conditions, suitable for various terrains.",
+        "category": "Footwear",
+        "price": 129.99,
+        "stock": 75,
+        "brand": "Merrell",
+        "color": "Gray/Pink",
+        "size": "Multiple sizes available",
+        "material": "Leather and synthetic upper with waterproof membrane",
+        "weather": "Rain",
+        "image": "http://localhost:8080/images/image6.jpg",
+        "weight": "Varies by size",
+        "dimensions": {
+            "length": "Varies by size",
+            "width": "Varies by size",
+            "height": "Varies by size"
+        }
+    },
+    {
+        "id": "8",
+        "productName": "Women's Waterproof Hiking Boots",
+        "description": "Sturdy and waterproof hiking boots with grippy outsoles for traction in wet conditions, suitable for various terrains.",
+        "category": "Footwear",
+        "price": 129.99,
+        "stock": 75,
+        "brand": "Merrell",
+        "color": "Gray/Pink",
+        "size": "Multiple sizes available",
+        "material": "Leather and synthetic upper with waterproof membrane",
+        "weather": "Rain",
+        "image": "http://localhost:8080/images/image7.jpg",
+        "weight": "Varies by size",
+        "dimensions": {
+            "length": "Varies by size",
+            "width": "Varies by size",
+            "height": "Varies by size"
+        }
+    }
+]

@@ -1,0 +1,115 @@
+[
+    {
+        "order": {
+            "id": 123456789,
+            "email": "sarah.miller@example.com",
+            "closed_at": null,
+            "created_at": "2024-04-01T10:00:00-04:00",
+            "updated_at": "2024-04-01T10:05:00-04:00",
+            "number": 1001,
+            "note": "Please deliver between 9 AM and 12 PM.",
+            "token": "b8a9f7153e5a6eefb4f7b21bdfaebe",
+            "gateway": "stripe",
+            "test": false,
+            "total_price": "199.00",
+            "subtotal_price": "180.00",
+            "total_weight": 0,
+            "total_tax": "19.00",
+            "taxes_included": false,
+            "currency": "USD",
+            "financial_status": "paid",
+            "confirmed": true,
+            "total_discounts": "0.00",
+            "total_line_items_price": "180.00",
+            "cart_token": "68778783ad298f1c80c3bafcddeea02f",
+            "buyer_accepts_marketing": false,
+            "name": "#1001",
+            "referring_site": "google.com",
+            "landing_site": "/direct/url/path",
+            "cancelled_at": null,
+            "cancel_reason": null,
+            "total_price_usd": "199.00",
+            "checkout_token": "bd5a8aa1ecd998abc1237df4ef7b",
+            "reference": "123456",
+            "user_id": 7089999,
+            "location_id": null,
+            "source_identifier": null,
+            "source_url": null,
+            "processed_at": "2024-04-01T10:00:00-04:00",
+            "device_id": null,
+            "phone": null,
+            "customer_locale": "en",
+            "app_id": 1234567,
+            "browser_ip": "123.123.123.123",
+            "landing_site_ref": "direct",
+            "order_number": 1234,
+            "discount_applications": [],
+            "discount_codes": [],
+            "note_attributes": [],
+            "payment_gateway_names": [
+                "stripe"
+            ],
+            "processing_method": "direct",
+            "checkout_id": 901414060,
+            "source_name": "web",
+            "fulfillment_status": "fulfilled",
+            "tax_lines": [
+                {
+                    "price": "19.00",
+                    "rate": 0.1,
+                    "title": "GST",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "19.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "19.00",
+                            "currency_code": "USD"
+                        }
+                    }
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 123456789,
+                    "variant_id": 123456789,
+                    "title": "Custom Engraved Watch",
+                    "quantity": 1,
+                    "price": "180.00",
+                    "sku": "ENGRAVE-WATCH",
+                    "variant_title": "Silver",
+                    "vendor": "Luxury Watches",
+                    "fulfillment_service": "manual",
+                    "product_id": 123456789,
+                    "requires_shipping": true,
+                    "taxable": true,
+                    "gift_card": false,
+                    "name": "Custom Engraved Watch - Silver",
+                    "variant_inventory_management": "shopify",
+                    "properties": [
+                        {
+                            "name": "Engraving",
+                            "value": "Happy Birthday, Alex!"
+                        }
+                    ],
+                    "product_exists": true,
+                    "fulfillable_quantity": 1,
+                    "grams": 500,
+                    "total_discount": "0.00",
+                    "fulfillment_status": null,
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "180.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "180.00",
+                            "currency_code": "USD"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]
