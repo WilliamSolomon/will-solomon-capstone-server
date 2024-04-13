@@ -7,20 +7,23 @@ router
     .get(apiController.getAllUserAlerts)
 
 router
+    .route("/alerts/")
+        .post(apiController.addAlert)
+
+router
     .route("/alerts/:id/")
-    .post(apiController.addAlert)
-    .put(apiController.editAlert)
-    .delete(apiController.removeAlert)
+//     .put(apiController.editAlert)
+//     .delete(apiController.removeAlert)
 
-router
-    .route("/settings/user/:id")
-    .get(apiController.getUserAlertSettings)
+// router
+//     .route("/settings/user/:id")
+//     .get(apiController.getUserAlertSettings)
 
-router
-    .route("/settings/:id/")
-    .post(apiController.addAlertSetting)
-    .put(apiController.editAlertSetting)
-    .delete(apiController.removeAlertSetting)
+// router
+//     .route("/settings/:id/")
+//     .post(apiController.addAlertSetting)
+//     .put(apiController.editAlertSetting)
+//     .delete(apiController.removeAlertSetting)
 
 module.exports = router;
 
