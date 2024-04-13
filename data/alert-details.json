@@ -1,46 +1,56 @@
 [
-    {
-        "id": "1",
-        "user_id": "1",
-        "category": "weather_type",
-        "condition": "cloudy",
-        "current_condition": "fog",
-        "status": "active",
-        "specified_date": null,
-        "created_at": "2024-04-01T10:00:00-04:00",
-        "updated_at": "2024-04-01T10:05:00-04:00"
-    },
-    {
-        "id": "1",
-        "user_id": "1",
-        "category": "specific_day",
-        "condition": "cloudy",
-        "current_condition": "clear skies",
-        "status": "active",
-        "specified_date": "2024-04-01T10:00:00-04:00",
-        "created_at": "2024-04-01T10:00:00-04:00",
-        "updated_at": "2024-04-01T10:05:00-04:00"
-    },
-    {
-        "id": "1",
-        "user_id": "2",
-        "category": "weather_type",
-        "condition": "cloudy",
-        "current_condition": "fog",
-        "status": "active",
-        "specified_date": null,
-        "created_at": "2024-04-01T10:00:00-04:00",
-        "updated_at": "2024-04-01T10:05:00-04:00"
-    },
-    {
-        "id": "1",
-        "user_id": "2",
-        "category": "specific_day",
-        "condition": "cloudy",
-        "current_condition": "clear skies",
-        "status": "active",
-        "specified_date": "2024-04-01T10:00:00-04:00",
-        "created_at": "2024-04-01T10:00:00-04:00",
-        "updated_at": "2024-04-01T10:05:00-04:00"
-    }
+  {
+    "id": "2d3cf12d-1127-420a-b00e-1958f1c7f04a",
+    "created_at": "2024-04-13T01:24:03.012Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "cloudy",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": null
+  },
+  {
+    "id": "1",
+    "user_id": "1",
+    "category": "weather_type",
+    "condition": "cloudy",
+    "current_condition": "fog",
+    "status": "active",
+    "specified_date": null,
+    "created_at": "2024-04-01T10:00:00-04:00",
+    "updated_at": "2024-04-01T10:05:00-04:00"
+  },
+  {
+    "id": "1",
+    "user_id": "1",
+    "category": "specific_day",
+    "condition": "cloudy",
+    "current_condition": "clear skies",
+    "status": "active",
+    "specified_date": "2024-04-01T10:00:00-04:00",
+    "created_at": "2024-04-01T10:00:00-04:00",
+    "updated_at": "2024-04-01T10:05:00-04:00"
+  },
+  {
+    "id": "1",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "cloudy",
+    "current_condition": "fog",
+    "status": "active",
+    "specified_date": null,
+    "created_at": "2024-04-01T10:00:00-04:00",
+    "updated_at": "2024-04-01T10:05:00-04:00"
+  },
+  {
+    "id": "1",
+    "user_id": "2",
+    "category": "specific_day",
+    "condition": "cloudy",
+    "current_condition": "clear skies",
+    "status": "active",
+    "specified_date": "2024-04-01T10:00:00-04:00",
+    "created_at": "2024-04-01T10:00:00-04:00",
+    "updated_at": "2024-04-01T10:05:00-04:00"
+  }
 ]
