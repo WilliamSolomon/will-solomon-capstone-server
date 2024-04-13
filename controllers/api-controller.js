@@ -46,72 +46,162 @@ const addAlert = async (req, res) => {
     }
 }
 
+const editAlert = async (req, res) => {
+    try {
+        const alertId = req.params.id;
+        const updatedAlertData = req.body; 
+
+        let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
+
+        // Locate the index of the alert
+        const alertIndex = alertsData.findIndex(alert => alert.id === alertId);
+
+        if (alertIndex === -1) {
+            return res.status(404).send("Alert not found");
+        }
+
+        alertsData[alertIndex] = {
+            ...alertsData[alertIndex],
+            ...updatedAlertData,
+            updated_at: new Date().toISOString() // Update the updated_at field with current date and time
+        };
+
+        fs.writeFileSync("./data/alert-details.json", JSON.stringify(alertsData, null, 2));
+
+        res.status(200).json(alertsData[alertIndex]);
+    } catch (err) {
+        res.status(400).send(`Error editing alert: ${err}`);
+    }
+}
+
+const removeAlert = async (req, res) => {
+    try {
+        const alertId = req.params.id;
+
+        let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
+
+        // Locate alert with matching ID
+        const alertIndex = alertsData.findIndex(alert => alert.id === alertId);
+
+        if (alertIndex === -1) {
+            return res.status(404).send("Alert not found");
+        }
+
+        // Remove the alert from the array. '1' specifies number of elements to remove
+        alertsData.splice(alertIndex, 1);
+
+        fs.writeFileSync("./data/alert-details.json", JSON.stringify(alertsData, null, 2));
+
+        res.status(200).send("Alert deleted successfully");
+    } catch (err) {
+        res.status(400).send(`Error deleting alert: ${err}`);
+    }
+}
 
 
+const getUserAlertSettings = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const settingsData = fs.readFileSync("./data/settings-details.json");
+        const parsedData = JSON.parse(settingsData);
+
+        //Filter for specific user
+        const userSettings = parsedData.filter(setting => setting.user_id === userId);
+
+        res.status(200).json(userSettings);
+    } catch (err) {
+        res.status(400).send(`Error retrieving user(${req.params.id}) settings: ${err}`)
+    }
+}
 
 
+const addAlertSetting = async (req, res) => {
+    try {
+        const newSetting = req.body;
 
-// const getUser = async (req, res) => {
+        const newId = uuidv4();
+        const createdAt = new Date().toISOString();
 
-//     const userId = req.params.id
-//     const usersJSONString = fs.readFileSync("./data/user-details.json");
-//     const userDetails = JSON.parse(usersJSONString);
-//     const user = userDetails.find((user) => user.id === parseInt(userId));
+        const updatedSetting = {
+            id: newId,
+            created_at: createdAt,
+            ...newSetting // Spread the remaining properties from newSetting object
+        };
 
+        let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
 
-//     if (!user) {
-//         return res.status(404).json({
-//             message: `User with ID ${req.params.id} not found`
-//         })
-//     }
+        settingData.unshift(updatedSetting);
 
+        console.log(settingData);
 
-//     res.status(200).json(user);
-// }
+        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2)); // null for no transformation, 2 for formatting output
 
+        res.status(201).json(updatedSetting);
+    } catch (err) {
+        res.status(400).send(`Error adding new alert: ${err}`);
+    }
+}
 
-// const getAllProducts = async (_req, res) => {
-//     try {
-//         const productsData = fs.readFileSync("./data/product-details.json");
-//         const parsedData = JSON.parse(productsData);
-//         res.status(200).json(parsedData);
-//     } catch (err) {
-//         res.status(400).send(`Error retrieving products: ${err}`);
-//     }
-// }
+const editAlertSetting = async (req, res) => {
+    try {
+        const alertSettingId = req.params.id;
+        const updatedAlertData = req.body; 
 
+        let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
 
-// const getProductItem = async (req, res) => {
-//     try {
-//         const productId = req.params.id
-//         const productsJSONString = fs.readFileSync("./data/product-details.json");
-//         const productDetails = JSON.parse(productsJSONString);
-//         console.log(req.params.id);
-//         console.log('Product Item', productDetails[0].id);
-//         const productItem = productDetails.find((product) => product.id === productId);
+        // Locate the index of the setting
+        const alertIndex = settingData.findIndex(alert => alert.id === alertSettingId);
 
-//         if (productItem.length === 0) {
-//             return res.status(404).json({
-//                 message: `User with ID ${req.params.id} not found`
-//             })
-//         }
+        if (alertIndex === -1) {
+            return res.status(404).send("Alert not found");
+        }
 
+        settingData[alertIndex] = {
+            ...settingData[alertIndex],
+            ...updatedAlertData,
+            updated_at: new Date().toISOString() // Update the updated_at field with current date and time
+        };
+        
+        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2));
 
-//         if (!productItem) {
-//             return res.status(404).json({
-//                 message: `Inventory item with ID ${id} not found`
-//             });
-//         }
-//         res.status(200).json(productItem);
-//     } catch (error) {
-//         res.status(500).json({
-//             message: `Unable to retrieve product item with ID ${req.params.id}: ${error}`
-//         });
-//     }
-// };
+        res.status(200).json(settingData[alertIndex]);
+    } catch (err) {
+        res.status(400).send(`Error editing alert: ${err}`);
+    }
+}
+
+const removeAlertSetting = async (req, res) => {
+    try {
+        const settingId = req.params.id;
+
+        let settingsData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+
+        // Locate setting with matching ID
+        const settingIndex = settingsData.findIndex(setting => setting.id === settingId);
+
+        if (settingIndex === -1) {
+            return res.status(404).send("Alert not found");
+        }
+
+        // Remove the alert from the array. '1' specifies number of elements to remove
+        settingsData.splice(settingIndex, 1);
+
+        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingsData, null, 2));
+
+        res.status(200).send("Alert deleted successfully");
+    } catch (err) {
+        res.status(400).send(`Error deleting alert: ${err}`);
+    }
+}
 
 
 module.exports = {
     getAllUserAlerts,
-    addAlert
+    addAlert,
+    editAlert,
+    removeAlert,
+    getUserAlertSettings,
+    addAlertSetting,
+    editAlertSetting,
+    removeAlertSetting
 };
