@@ -8,7 +8,7 @@ router
 
 router
     .route("/alerts/")
-        .post(apiController.addAlert)
+    .post(apiController.addAlert)
 
 router
     .route("/alerts/:id/")
@@ -27,6 +27,11 @@ router
     .route("/settings/:id")
     .put(apiController.editAlertSetting)
     .delete(apiController.removeAlertSetting)
+
+
+router
+    .route("/users/:id")
+    .get(apiController.getUserData)
 
 module.exports = router;
 
