@@ -195,6 +195,22 @@ const removeAlertSetting = async (req, res) => {
 }
 
 
+const getUserData = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const userData = fs.readFileSync("./data/user-details.json");
+        const parsedData = JSON.parse(userData);
+
+        //Filter for specific user
+        const userInfo = parsedData.filter(user => user.id === userId);
+
+        res.status(200).json(userInfo);
+    } catch (err) {
+        res.status(400).send(`Error retrieving user(${req.params.id}) information: ${err}`)
+    }
+}
+
+
 module.exports = {
     getAllUserAlerts,
     addAlert,
@@ -203,5 +219,6 @@ module.exports = {
     getUserAlertSettings,
     addAlertSetting,
     editAlertSetting,
-    removeAlertSetting
+    removeAlertSetting,
+    getUserData
 };
