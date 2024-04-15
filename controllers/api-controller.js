@@ -1,4 +1,3 @@
-const { log } = require("console");
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 
@@ -136,16 +135,44 @@ const addAlertSetting = async (req, res) => {
 
         fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2)); // null for no transformation, 2 for formatting output
 
-        res.status(201).json(updatedSetting);
+        res.status(201).json(settingData);
     } catch (err) {
         res.status(400).send(`Error adding new alert: ${err}`);
+    }
+}
+
+const getAlertSetting = async (req, res) => {
+    try {
+        const settingId = req.params.id;
+        const updatedSettingData = req.body; 
+
+        let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+
+        // Locate the index of the alert
+        const settingIndex = settingData.findIndex(setting => setting.id === settingId);
+
+        if (settingIndex === -1) {
+            return res.status(404).send("Setting not found");
+        }
+
+        settingData[settingIndex] = {
+            ...settingData[settingIndex],
+            ...updatedSettingData,
+            // updated_at: new Date().toISOString() // Update the updated_at field with current date and time
+        };
+
+        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2));
+
+        res.status(200).json(settingData[settingIndex]);
+    } catch (err) {
+        res.status(400).send(`Error editing alert: ${err}`);
     }
 }
 
 const editAlertSetting = async (req, res) => {
     try {
         const alertSettingId = req.params.id;
-        const updatedAlertData = req.body; 
+        const updatedSettingData = req.body; 
 
         let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
 
@@ -218,6 +245,7 @@ module.exports = {
     removeAlert,
     getUserAlertSettings,
     addAlertSetting,
+    getAlertSetting,
     editAlertSetting,
     removeAlertSetting,
     getUserData

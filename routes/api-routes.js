@@ -25,6 +25,7 @@ router
 
 router
     .route("/settings/:id")
+    .get(apiController.getAlertSetting)
     .put(apiController.editAlertSetting)
     .delete(apiController.removeAlertSetting)
 
