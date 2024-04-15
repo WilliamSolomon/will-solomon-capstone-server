@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const apiController = require("../controllers/api-controller");
 
+router
+    .get("/weather/current/:userId", apiController.getCurrentWeather);
+router
+    .get("/weather/forecast/:userId", apiController.getForecastWeather);
 
 router
     .route("/alerts/user/:id")

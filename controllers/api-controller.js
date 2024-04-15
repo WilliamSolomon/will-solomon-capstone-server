@@ -1,6 +1,72 @@
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 
+const PORT = process.env.PORT || 5050;
+
+const currentWeatherAPI_URL = process.env.currentWeatherAPI_URL
+const forecastWeatherAPI_URL = process.env.forecastWeatherAPI_URL
+const weatherAPI_Key = process.env.weatherAPI_Key
+
+const getCurrentWeather = async (req, res) => {
+    try {
+        const { lat, lon } = req.query;
+        const { userId } = req.params;
+        const response = await fetch(`${currentWeatherAPI_URL}/weather?lat=${lat}&lon=${lon}&appid=${weatherAPI_Key}&units=imperial`);
+        const weatherData = await response.json();
+        res.json(weatherData);
+
+        const currentWeatherData = {
+            user_id: userId,
+            weather: weatherData // Assuming currentWeatherResponse contains the weather data
+        };
+
+        logWeatherData(currentWeatherData);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+const getForecastWeather = async (req, res) => {
+    try {
+        const { lat, lon } = req.query;
+        const { userId } = req.params;
+        const response = await fetch(`${forecastWeatherAPI_URL}?lat=${lat}&lon=${lon}&exclude=hourly&appid=${weatherAPI_Key}&units=imperial`);
+        // https://api.openweathermap.org/data/3.0/onecall?lat=25.7743&lon=-80.1937&exclude=hourly&appid=a5a17f987e8d6c4387c94da7684f8979&units=imperial
+        const forecastData = await response.json();
+        res.json(forecastData);
+
+        const forecastWeatherData = {
+            user_id: userId,
+            weather: forecastData // Assuming forecastWeatherResponse contains the forecast weather data
+        };
+
+        logWeatherData(forecastWeatherData);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+
+// Log weather fetches to file
+const logWeatherData = (weatherData) => {
+    try {
+        let weatherDetails = JSON.parse(fs.readFileSync("./data/weather-details.json"));
+        weatherDetails.unshift(weatherData);
+
+        console.log("Weather Details",weatherDetails);
+        
+        fs.writeFileSync("./data/weather-details.json", JSON.stringify(weatherDetails, null, 2));
+    } catch (error) {
+        console.error("Error logging weather data:", error);
+    }
+};
+
+
+
 
 const getAllUserAlerts = async (req, res) => {
     try {
@@ -35,8 +101,6 @@ const addAlert = async (req, res) => {
 
         alertsData.unshift(updatedAlert);
 
-        console.log(alertsData);
-
         fs.writeFileSync("./data/alert-details.json", JSON.stringify(alertsData, null, 2)); // null for no transformation, 2 for formatting output
 
         res.status(201).json(updatedAlert);
@@ -48,7 +112,7 @@ const addAlert = async (req, res) => {
 const editAlert = async (req, res) => {
     try {
         const alertId = req.params.id;
-        const updatedAlertData = req.body; 
+        const updatedAlertData = req.body;
 
         let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
 
@@ -131,8 +195,6 @@ const addAlertSetting = async (req, res) => {
 
         settingData.unshift(updatedSetting);
 
-        console.log(settingData);
-
         fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2)); // null for no transformation, 2 for formatting output
 
         res.status(201).json(settingData);
@@ -144,7 +206,7 @@ const addAlertSetting = async (req, res) => {
 const getAlertSetting = async (req, res) => {
     try {
         const settingId = req.params.id;
-        const updatedSettingData = req.body; 
+        const updatedSettingData = req.body;
 
         let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
 
@@ -172,7 +234,7 @@ const getAlertSetting = async (req, res) => {
 const editAlertSetting = async (req, res) => {
     try {
         const alertSettingId = req.params.id;
-        const updatedSettingData = req.body; 
+        const updatedSettingData = req.body;
 
         let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
 
@@ -188,7 +250,7 @@ const editAlertSetting = async (req, res) => {
             ...updatedAlertData,
             updated_at: new Date().toISOString() // Update the updated_at field with current date and time
         };
-        
+
         fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2));
 
         res.status(200).json(settingData[alertIndex]);
@@ -239,6 +301,8 @@ const getUserData = async (req, res) => {
 
 
 module.exports = {
+    getCurrentWeather,
+    getForecastWeather,
     getAllUserAlerts,
     addAlert,
     editAlert,
