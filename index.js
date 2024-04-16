@@ -27,10 +27,23 @@ app.use('/api', apiRoutes);
 app.listen(PORT, async () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 
-      // Call generateAlertsForAllUsers function when the server starts
-      await generateAlertsForAllUsers();
+    // Call generateAlertsForAllUsers function when the server starts
+    await generateAlertsForAllUsers();
 
-    // Schedule a cron job to run cleanupExpiredAlerts.js every night at midnight (00:00)
+    // Hourly cron job to run generateAlertsForAllUsers()
+    cron.schedule('0 * * * *', async () => {
+        console.log('Running generateAlertsForAllUsers()...');
+
+        try {
+            // Call generateAlertsForAllUsers function
+            await generateAlertsForAllUsers();
+            console.log('generateAlertsForAllUsers() completed successfully.');
+        } catch (error) {
+            console.error('Error running generateAlertsForAllUsers():', error);
+        }
+    });
+
+    // Daily (00:00) cron job to run cleanupExpiredAlerts.js
     cron.schedule('0 0 * * *', () => {
         console.log('Running cleanupExpiredAlerts.js...');
 
