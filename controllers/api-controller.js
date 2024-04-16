@@ -74,16 +74,34 @@ const logWeatherData = (weatherData) => {
 
 
 
+// const getAllUserAlerts = async (req, res) => {
+//     try {
+//         const userId = req.params.id;
+//         const alertsData = fs.readFileSync("./data/alert-details.json");
+//         const parsedData = JSON.parse(alertsData);
+
+//         //Filter for specific user
+//         const userAlerts = parsedData.filter(alert => alert.user_id === userId);
+
+//         res.status(200).json(userAlerts);
+//     } catch (err) {
+//         res.status(400).send(`Error retrieving user(${req.params.id}) alerts: ${err}`)
+//     }
+// }
+
 const getAllUserAlerts = async (req, res) => {
     try {
         const userId = req.params.id;
         const alertsData = fs.readFileSync("./data/alert-details.json");
         const parsedData = JSON.parse(alertsData);
 
-        //Filter for specific user
+        // Filter for specific user
         const userAlerts = parsedData.filter(alert => alert.user_id === userId);
 
-        res.status(200).json(userAlerts);
+        // Filter for active alerts
+        const activeAlerts = userAlerts.filter(alert => alert.status === "active");
+
+        res.status(200).json(activeAlerts);
     } catch (err) {
         res.status(400).send(`Error retrieving user(${req.params.id}) alerts: ${err}`)
     }
@@ -119,6 +137,9 @@ const editAlert = async (req, res) => {
     try {
         const alertId = req.params.id;
         const updatedAlertData = req.body;
+
+        console.log("Alert ID", alertId);
+        console.log("Updated Alert Data", updatedAlertData);
 
         let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
 
@@ -182,6 +203,8 @@ const getUserAlertSettings = async (req, res) => {
         res.status(400).send(`Error retrieving user(${req.params.id}) settings: ${err}`)
     }
 }
+
+
 
 
 const addAlertSetting = async (req, res) => {
@@ -312,7 +335,6 @@ module.exports = {
     getAllUserAlerts,
     addAlert,
     editAlert,
-    archiveAlert,
     removeAlert,
     getUserAlertSettings,
     addAlertSetting,

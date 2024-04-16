@@ -1,5 +1,88 @@
 [
   {
+    "id": "ac8404f9-646e-4dc4-8b9d-ac7006603506",
+    "created_at": "2024-04-16T20:00:40.389Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clear",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713891600
+  },
+  {
+    "id": "c1b981a6-2c0c-4e35-9525-7ea584ae0bae",
+    "created_at": "2024-04-16T20:00:40.389Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713805200
+  },
+  {
+    "id": "401f3f23-e221-4d04-abd1-a6e0cbf91700",
+    "created_at": "2024-04-16T20:00:40.389Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713718800
+  },
+  {
+    "id": "a0fb44d3-3762-47b3-82fb-5a2d85158071",
+    "created_at": "2024-04-16T20:00:40.389Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clear",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713632400
+  },
+  {
+    "id": "1a00c7c5-67b2-491a-a9e0-877185a94bad",
+    "created_at": "2024-04-16T20:00:40.389Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713546000
+  },
+  {
+    "id": "fa94fce1-ee26-4411-9d27-903695d278a9",
+    "created_at": "2024-04-16T20:00:40.389Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clear",
+    "current_condition": null,
+    "status": "archived",
+    "specified_date": 1713459600,
+    "updated_at": "2024-04-16T20:12:04.060Z"
+  },
+  {
+    "id": "6102633d-c2a2-4793-9ba8-2f05e44cf6fd",
+    "created_at": "2024-04-16T20:00:40.389Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "archived",
+    "specified_date": 1713373200,
+    "updated_at": "2024-04-16T20:11:55.952Z"
+  },
+  {
+    "id": "9075b4ef-a352-42af-98ad-401ebc71c4e1",
+    "created_at": "2024-04-16T20:00:40.388Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "archived",
+    "specified_date": 1713286800,
+    "updated_at": "2024-04-16T20:10:46.871Z"
+  },
+  {
     "id": "16494f48-7ca7-4c6b-a584-c3a2a725d1c5",
     "created_at": "2024-04-16T15:42:34.813Z",
     "user_id": "1",
