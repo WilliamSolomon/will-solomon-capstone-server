@@ -312,6 +312,7 @@ module.exports = {
     getAllUserAlerts,
     addAlert,
     editAlert,
+    archiveAlert,
     removeAlert,
     getUserAlertSettings,
     addAlertSetting,
