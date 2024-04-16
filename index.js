@@ -4,6 +4,7 @@ require("dotenv").config();
 const cron = require('node-cron');
 const { exec } = require('child_process');
 
+const generateAlertsForAllUsers = require('./utils/generateAlertsForAllUsers');
 
 const PORT = process.env.PORT || 5050;
 
@@ -23,8 +24,11 @@ app.use("/images", express.static("images"));
 app.use('/api', apiRoutes);
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Server is running at http://localhost:${PORT}`);
+
+      // Call generateAlertsForAllUsers function when the server starts
+      await generateAlertsForAllUsers();
 
     // Schedule a cron job to run cleanupExpiredAlerts.js every night at midnight (00:00)
     cron.schedule('0 0 * * *', () => {

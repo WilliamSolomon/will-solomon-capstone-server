@@ -1,8 +1,6 @@
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
 
-const PORT = process.env.PORT || 5050;
-
 const currentWeatherAPI_URL = process.env.currentWeatherAPI_URL
 const forecastWeatherAPI_URL = process.env.forecastWeatherAPI_URL
 const weatherAPI_Key = process.env.weatherAPI_Key
@@ -20,7 +18,12 @@ const getCurrentWeather = async (req, res) => {
             weather: weatherData // Assuming currentWeatherResponse contains the weather data
         };
 
-        logWeatherData(currentWeatherData);
+        // console.log(currentWeatherData);
+
+        // console.log("Weather Data", weatherData);
+
+        // logWeatherData(currentWeatherData);
+
 
     } catch (error) {
         console.error(error);
@@ -37,12 +40,15 @@ const getForecastWeather = async (req, res) => {
         const forecastData = await response.json();
         res.json(forecastData);
 
+        // console.log("Forecast Data", forecastData);
+
         const forecastWeatherData = {
             user_id: userId,
             weather: forecastData // Assuming forecastWeatherResponse contains the forecast weather data
         };
 
-        logWeatherData(forecastWeatherData);
+        // logWeatherData(forecastWeatherData);
+        logWeatherData(forecastData);
 
     } catch (error) {
         console.error(error);
@@ -57,8 +63,8 @@ const logWeatherData = (weatherData) => {
         let weatherDetails = JSON.parse(fs.readFileSync("./data/weather-details.json"));
         weatherDetails.unshift(weatherData);
 
-        console.log("Weather Details",weatherDetails);
-        
+        // console.log("Weather Details", weatherDetails);
+
         fs.writeFileSync("./data/weather-details.json", JSON.stringify(weatherDetails, null, 2));
     } catch (error) {
         console.error("Error logging weather data:", error);
@@ -247,7 +253,7 @@ const editAlertSetting = async (req, res) => {
 
         settingData[alertIndex] = {
             ...settingData[alertIndex],
-            ...updatedAlertData,
+            ...updatedSettingData,
             updated_at: new Date().toISOString() // Update the updated_at field with current date and time
         };
 
