@@ -10,7 +10,7 @@ const weatherAPI_Key = process.env.weatherAPI_Key
 
 
 const registerNewUser = async (req, res) => {
-    const { first_name, last_name, phone, address, email, password } = req.body;
+    const { first_name, last_name, email, password, city, lat, lon } = req.body;
     
     if (!first_name || !last_name || !email || !password) {
         return res.status(400).send("Please enter the required fields.");
@@ -28,10 +28,10 @@ const registerNewUser = async (req, res) => {
         last_name,
         email,
         password: hashedPassword,
-        city: "", 
+        city, 
         coord: {
-            lon: null,
-            lat: null  
+            lon,
+            lat  
         },
         created_at: new Date().toISOString() 
     };
