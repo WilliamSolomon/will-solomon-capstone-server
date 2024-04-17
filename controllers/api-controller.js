@@ -1,9 +1,138 @@
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const authorize = require('../middleware/authorize');
 
 const currentWeatherAPI_URL = process.env.currentWeatherAPI_URL
 const forecastWeatherAPI_URL = process.env.forecastWeatherAPI_URL
 const weatherAPI_Key = process.env.weatherAPI_Key
+
+
+const registerNewUser = async (req, res) => {
+    const { first_name, last_name, phone, address, email, password } = req.body;
+    
+    if (!first_name || !last_name || !email || !password) {
+        return res.status(400).send("Please enter the required fields.");
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10); 
+
+    const userId = uuidv4();
+
+
+
+    const newUser = {
+        id: userId, 
+        first_name,
+        last_name,
+        email,
+        password: hashedPassword,
+        city: "", 
+        coord: {
+            lon: null,
+            lat: null  
+        },
+        created_at: new Date().toISOString() 
+    };
+
+    try {
+        
+        let userData = fs.readFileSync("./data/user-details.json");
+        userData = JSON.parse(userData);
+
+        
+        userData.push(newUser);
+
+        
+        fs.writeFileSync("./data/user-details.json", JSON.stringify(userData, null, 2));
+
+        res.status(201).send("Registered successfully");
+    } catch (error) {
+        console.log(error);
+        res.status(400).send("Failed registration");
+    }
+}
+
+
+const loginAuthenticate = async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).send("Please enter the required fields");
+    }
+
+    try {
+        
+        let userData = fs.readFileSync("./data/user-details.json");
+        userData = JSON.parse(userData);
+
+
+        const user = userData.find(u => u.email === email);
+
+        if (!user) {
+            return res.status(400).send("Invalid Email");
+        }
+
+   
+        const isPasswordCorrect = bcrypt.compareSync(password, user.password);
+        if (!isPasswordCorrect) {
+            return res.status(400).send("Invalid Password");
+        }
+
+ 
+        const token = jwt.sign(
+            { 
+                id: user.id, 
+                email: user.email,
+                city: user.city,
+                coord: user.coord
+            }, 
+            process.env.JWT_KEY,
+            { expiresIn: '365d' }
+        );
+
+        
+        res.json({ token });
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+
+
+const getCurrentUser = async (req, res) => {
+    try {
+        
+        let userData = fs.readFileSync("./data/user-details.json");
+        userData = JSON.parse(userData);
+
+     
+        const user = userData.find(u => u.id === req.user.id);
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        res.json(user);
+    } catch (error) {
+        return res.status(500).send(`Unknown server error: ${error}`);
+    }
+}
+
+const getAllUsers = async (req, res) => {
+    try {
+     
+        let userData = fs.readFileSync("./data/user-details.json");
+        userData = JSON.parse(userData);
+
+        res.json(userData);
+    } catch (error) {
+        res.status(500).json({ message: "Unable to retrieve users data" });
+    }
+}
+
 
 const getCurrentWeather = async (req, res) => {
     try {
@@ -15,14 +144,10 @@ const getCurrentWeather = async (req, res) => {
 
         const currentWeatherData = {
             user_id: userId,
-            weather: weatherData // Assuming currentWeatherResponse contains the weather data
+            weather: weatherData 
         };
 
-        // console.log(currentWeatherData);
-
-        // console.log("Weather Data", weatherData);
-
-        // logWeatherData(currentWeatherData);
+    
 
 
     } catch (error) {
@@ -44,7 +169,7 @@ const getForecastWeather = async (req, res) => {
 
         const forecastWeatherData = {
             user_id: userId,
-            weather: forecastData // Assuming forecastWeatherResponse contains the forecast weather data
+            weather: forecastData 
         };
 
         // logWeatherData(forecastWeatherData);
@@ -118,7 +243,7 @@ const addAlert = async (req, res) => {
         const updatedAlert = {
             id: newId,
             created_at: createdAt,
-            ...newAlert // Spread the remaining properties from newAlert object
+            ...newAlert 
         };
 
         let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
@@ -330,6 +455,10 @@ const getUserData = async (req, res) => {
 
 
 module.exports = {
+    registerNewUser,
+    loginAuthenticate,
+    getCurrentUser,
+    getAllUsers,
     getCurrentWeather,
     getForecastWeather,
     getAllUserAlerts,

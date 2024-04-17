@@ -1,32 +1,45 @@
 [
-    {
-        "id": "2",
-        "first_name": "Will",
-        "last_name": "Solomon",
-        "city": "Miami-Dade County, Florida, US",
-        "coord": {
-            "lon": -80.1937,
-            "lat": 25.7743
-        },
-        "phone": "2023-03-25T12:15:22-04:00",
-        "email": "wsolomon@example.com",
-        "password": "Sarah",
-        "status": "active",
-        "created_at": "2024-04-01T10:00:00-04:00"
+  {
+    "id": "2",
+    "first_name": "Will",
+    "last_name": "Solomon",
+    "city": "Miami-Dade County, Florida, US",
+    "coord": {
+      "lon": -80.1937,
+      "lat": 25.7743
     },
-    {
-        "id": "1",
-        "first_name": "Brian",
-        "last_name": "Davis",
-        "city": "Brooklyn, NY, US",
-        "coord": {
-            "lon": 40.650002,
-            "lat": -73.949997
-        },
-        "phone": "2023-03-25T12:15:22-04:00",
-        "email": "bdavis@example.com",
-        "password": "Sarah",
-        "status": "active",
-        "created_at": "2024-04-01T10:00:00-04:00"
-    }
+    "phone": "2023-03-25T12:15:22-04:00",
+    "email": "wsolomon@example.com",
+    "password": "Sarah",
+    "status": "active",
+    "created_at": "2024-04-01T10:00:00-04:00"
+  },
+  {
+    "id": "1",
+    "first_name": "Brian",
+    "last_name": "Davis",
+    "city": "Brooklyn, NY, US",
+    "coord": {
+      "lon": 40.650002,
+      "lat": -73.949997
+    },
+    "phone": "2023-03-25T12:15:22-04:00",
+    "email": "bdavis@example.com",
+    "password": "Sarah",
+    "status": "active",
+    "created_at": "2024-04-01T10:00:00-04:00"
+  },
+  {
+    "id": "1db286c8-76c7-43c0-aa75-369323c1ca54",
+    "first_name": "Will",
+    "last_name": "Solomon",
+    "email": "wsolomon@live.com",
+    "password": "$2a$10$570xoDqP43X6cnX5lqy2QOnT/eERbRJsGoFpwaDJEv9.ADHydw51a",
+    "city": "",
+    "coord": {
+      "lon": null,
+      "lat": null
+    },
+    "created_at": "2024-04-17T03:00:51.894Z"
+  }
 ]

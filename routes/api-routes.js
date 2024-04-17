@@ -1,5 +1,27 @@
 const router = require("express").Router();
 const apiController = require("../controllers/api-controller");
+const authorize = require("../middleware/authorize");
+
+
+router
+    .route("/users/register")
+    .post(apiController.registerNewUser)
+
+router
+    .route("/users/login")
+    .post(apiController.loginAuthenticate)
+
+router
+    .route("/users/current")
+        .get(
+        authorize,
+        apiController.getCurrentUser)
+
+router
+    .route("/")
+        .get(
+            authorize,
+            apiController.getAllUsers)
 
 router
     .get("/weather/current/:userId", apiController.getCurrentWeather);
@@ -32,7 +54,6 @@ router
     .get(apiController.getAlertSetting)
     .put(apiController.editAlertSetting)
     .delete(apiController.removeAlertSetting)
-
 
 router
     .route("/users/:id")
