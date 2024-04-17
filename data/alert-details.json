@@ -1,5 +1,25 @@
 [
   {
+    "id": "44e35870-7f81-4ef0-b835-f5c85d22337c",
+    "created_at": "2024-04-17T06:51:59.545Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713978000
+  },
+  {
+    "id": "cb9be5cf-c311-447f-bdcc-162b28dba6c2",
+    "created_at": "2024-04-17T06:51:59.545Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713459600
+  },
+  {
     "id": "58c0b276-fefa-48fe-a851-69a377063647",
     "created_at": "2024-04-16T00:45:07.815Z",
     "user_id": "2",
