@@ -1,5 +1,25 @@
 [
   {
+    "id": "29b36e21-2f13-47ef-8c90-77933bbffff0",
+    "created_at": "2024-04-17T18:31:09.829Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
+    "category": "Weather",
+    "condition": "Rain",
+    "status": "Active",
+    "specified_date": null,
+    "city": "Brooklyn, New York, US"
+  },
+  {
+    "id": "088571c6-7cb4-4404-b368-ec93ebb15eda",
+    "created_at": "2024-04-17T18:31:04.998Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
+    "category": "Weather",
+    "condition": "Clear",
+    "status": "Active",
+    "specified_date": null,
+    "city": "Brooklyn, New York, US"
+  },
+  {
     "id": "c4ac312a-a216-481f-aa1b-c3370504f48a",
     "created_at": "2024-04-17T06:02:46.723Z",
     "user_id": "1db286c8-76c7-43c0-aa75-369323c1ca54",

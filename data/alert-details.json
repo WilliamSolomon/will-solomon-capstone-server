@@ -1,171 +1,77 @@
 [
   {
-    "id": "44e35870-7f81-4ef0-b835-f5c85d22337c",
-    "created_at": "2024-04-17T06:51:59.545Z",
-    "user_id": "2",
+    "id": "affe8d58-f7ec-407b-8976-7d2e7ad47659",
+    "created_at": "2024-04-17T18:31:18.191Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
     "category": "weather_type",
-    "condition": "clouds",
+    "condition": "rain",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713978000
+    "specified_date": 1713974400
   },
   {
-    "id": "cb9be5cf-c311-447f-bdcc-162b28dba6c2",
-    "created_at": "2024-04-17T06:51:59.545Z",
-    "user_id": "2",
-    "category": "weather_type",
-    "condition": "clouds",
-    "current_condition": null,
-    "status": "active",
-    "specified_date": 1713459600
-  },
-  {
-    "id": "58c0b276-fefa-48fe-a851-69a377063647",
-    "created_at": "2024-04-16T00:45:07.815Z",
-    "user_id": "2",
-    "condition": "Rain",
-    "userId": "2",
-    "specified_date": null,
-    "category": "Weather",
-    "status": "Active"
-  },
-  {
-    "id": "58a7f3e4-50ad-43e5-babb-ebdbcc16c447",
-    "created_at": "2024-04-17T01:00:00.764Z",
-    "user_id": "2",
+    "id": "4fcd539f-5c7c-4dc2-920f-75f16ee20101",
+    "created_at": "2024-04-17T18:31:18.191Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
     "category": "weather_type",
     "condition": "clear",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713805200
+    "specified_date": 1713801600
   },
   {
-    "id": "58df469e-2ce1-444a-b55c-ac8d479b2d91",
-    "created_at": "2024-04-17T01:00:00.764Z",
-    "user_id": "2",
+    "id": "032c426e-be1d-4917-84f0-5e0dfab03b9e",
+    "created_at": "2024-04-17T18:31:18.191Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
     "category": "weather_type",
     "condition": "clear",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713718800
+    "specified_date": 1713715200
   },
   {
-    "id": "ac8404f9-646e-4dc4-8b9d-ac7006603506",
-    "created_at": "2024-04-16T20:00:40.389Z",
-    "user_id": "2",
+    "id": "9519378c-a150-47c6-ab16-1634ac5ced21",
+    "created_at": "2024-04-17T18:31:18.191Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
     "category": "weather_type",
-    "condition": "clear",
+    "condition": "rain",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713891600
+    "specified_date": 1713628800
   },
   {
-    "id": "c1b981a6-2c0c-4e35-9525-7ea584ae0bae",
-    "created_at": "2024-04-16T20:00:40.389Z",
-    "user_id": "2",
+    "id": "07a5eb1e-2b19-4c13-ad66-f4c53d66f713",
+    "created_at": "2024-04-17T18:31:18.191Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
     "category": "weather_type",
-    "condition": "clouds",
+    "condition": "rain",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713805200
+    "specified_date": 1713542400
   },
   {
-    "id": "401f3f23-e221-4d04-abd1-a6e0cbf91700",
-    "created_at": "2024-04-16T20:00:40.389Z",
-    "user_id": "2",
+    "id": "e45ba4dc-160e-4463-a847-f65536ee14ca",
+    "created_at": "2024-04-17T18:31:18.191Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
     "category": "weather_type",
-    "condition": "clouds",
+    "condition": "rain",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713718800
+    "specified_date": 1713456000
   },
   {
-    "id": "a0fb44d3-3762-47b3-82fb-5a2d85158071",
-    "created_at": "2024-04-16T20:00:40.389Z",
-    "user_id": "2",
+    "id": "4a745449-05de-4dbd-bfee-1627e65fcf30",
+    "created_at": "2024-04-17T18:31:18.191Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
     "category": "weather_type",
-    "condition": "clear",
+    "condition": "rain",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713632400
+    "specified_date": 1713369600
   },
   {
-    "id": "1a00c7c5-67b2-491a-a9e0-877185a94bad",
-    "created_at": "2024-04-16T20:00:40.389Z",
-    "user_id": "2",
-    "category": "weather_type",
-    "condition": "clouds",
-    "current_condition": null,
-    "status": "archived",
-    "specified_date": 1713546000,
-    "updated_at": "2024-04-17T02:24:28.561Z"
-  },
-  {
-    "id": "fa94fce1-ee26-4411-9d27-903695d278a9",
-    "created_at": "2024-04-16T20:00:40.389Z",
-    "user_id": "2",
-    "category": "weather_type",
-    "condition": "clear",
-    "current_condition": null,
-    "status": "archived",
-    "specified_date": 1713459600,
-    "updated_at": "2024-04-16T20:12:04.060Z"
-  },
-  {
-    "id": "6102633d-c2a2-4793-9ba8-2f05e44cf6fd",
-    "created_at": "2024-04-16T20:00:40.389Z",
-    "user_id": "2",
-    "category": "weather_type",
-    "condition": "clouds",
-    "current_condition": null,
-    "status": "archived",
-    "specified_date": 1713373200,
-    "updated_at": "2024-04-16T20:11:55.952Z"
-  },
-  {
-    "id": "9075b4ef-a352-42af-98ad-401ebc71c4e1",
-    "created_at": "2024-04-16T20:00:40.388Z",
-    "user_id": "2",
-    "category": "weather_type",
-    "condition": "clouds",
-    "current_condition": null,
-    "status": "archived",
-    "specified_date": 1713286800,
-    "updated_at": "2024-04-16T20:10:46.871Z"
-  },
-  {
-    "id": "16494f48-7ca7-4c6b-a584-c3a2a725d1c5",
-    "created_at": "2024-04-16T15:42:34.813Z",
-    "user_id": "1",
-    "category": "weather_type",
-    "condition": "clouds",
-    "current_condition": null,
-    "status": "active",
-    "specified_date": 1713862800
-  },
-  {
-    "id": "76840285-6a1d-4027-9cb8-a01c2a6db15b",
-    "created_at": "2024-04-16T15:42:34.813Z",
-    "user_id": "1",
-    "category": "weather_type",
-    "condition": "clouds",
-    "current_condition": null,
-    "status": "active",
-    "specified_date": 1713603600
-  },
-  {
-    "id": "afe15ba3-e30d-40b9-a288-e7c8114e2589",
-    "created_at": "2024-04-16T06:11:21.658Z",
-    "user_id": "1",
-    "category": "weather_type",
-    "condition": "clouds",
-    "current_condition": null,
-    "status": "active",
-    "specified_date": 1713776400
-  },
-  {
-    "id": "aede87da-c023-4e64-a8be-f2555677ec55",
-    "created_at": "2024-04-16T06:11:21.658Z",
+    "id": "e2f38979-2c4b-4a07-a843-265cda5d19b2",
+    "created_at": "2024-04-17T18:00:08.101Z",
     "user_id": "1",
     "category": "weather_type",
     "condition": "clouds",
@@ -174,8 +80,18 @@
     "specified_date": 1713690000
   },
   {
-    "id": "f21bb472-7ab0-4286-a88d-f40d6d1d2cfb",
-    "created_at": "2024-04-16T06:11:21.658Z",
+    "id": "509bad60-d52d-4473-8317-aa8f09ff6117",
+    "created_at": "2024-04-17T18:00:08.101Z",
+    "user_id": "1",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713603600
+  },
+  {
+    "id": "9de74adf-7a40-40a6-9443-3b2ffea6bb3a",
+    "created_at": "2024-04-17T18:00:08.101Z",
     "user_id": "1",
     "category": "weather_type",
     "condition": "clouds",
@@ -184,8 +100,8 @@
     "specified_date": 1713517200
   },
   {
-    "id": "60f8c0f3-4313-4183-8dad-74d791d043de",
-    "created_at": "2024-04-16T06:11:21.658Z",
+    "id": "85189788-b558-4517-a1a8-f419dac049e5",
+    "created_at": "2024-04-17T18:00:08.101Z",
     "user_id": "1",
     "category": "weather_type",
     "condition": "clouds",
@@ -194,8 +110,8 @@
     "specified_date": 1713430800
   },
   {
-    "id": "af066ae3-4d07-42fc-9370-eb7f572a1c07",
-    "created_at": "2024-04-16T06:11:21.657Z",
+    "id": "1f209e8d-5f75-4056-a932-4b43b343463a",
+    "created_at": "2024-04-17T18:00:08.101Z",
     "user_id": "1",
     "category": "weather_type",
     "condition": "clouds",
@@ -204,13 +120,84 @@
     "specified_date": 1713344400
   },
   {
-    "id": "b57c95e2-5f44-4593-83a7-e4ba5b70efae",
-    "created_at": "2024-04-16T06:11:21.657Z",
-    "user_id": "1",
+    "id": "951284eb-b95d-42d8-81c5-cd7677088dc0",
+    "created_at": "2024-04-17T18:00:02.914Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clear",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713891600
+  },
+  {
+    "id": "bddc127e-54c3-4f6c-8c7b-70d67180a8cf",
+    "created_at": "2024-04-17T18:00:02.914Z",
+    "user_id": "2",
     "category": "weather_type",
     "condition": "clouds",
     "current_condition": null,
     "status": "active",
-    "specified_date": 1713258000
+    "specified_date": 1713805200
+  },
+  {
+    "id": "881d87a4-bb92-402a-b9df-07ee07f7d149",
+    "created_at": "2024-04-17T18:00:02.914Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clear",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713718800
+  },
+  {
+    "id": "8d63600a-ff6c-41a5-a543-8dba4a225220",
+    "created_at": "2024-04-17T18:00:02.914Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clear",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713632400
+  },
+  {
+    "id": "0e1ec54e-a299-4d19-b684-01f1377933da",
+    "created_at": "2024-04-17T18:00:02.914Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713546000
+  },
+  {
+    "id": "0861a849-ecd9-4045-9d8e-1e8b2640911f",
+    "created_at": "2024-04-17T18:00:02.914Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713459600
+  },
+  {
+    "id": "83452e00-c334-483a-9aa8-f05f9ded4a56",
+    "created_at": "2024-04-17T18:00:02.914Z",
+    "user_id": "2",
+    "category": "weather_type",
+    "condition": "clouds",
+    "current_condition": null,
+    "status": "active",
+    "specified_date": 1713373200
+  },
+  {
+    "id": "9af39054-a2b9-4628-8ec9-830facdbe47f",
+    "created_at": "2024-04-17T17:19:11.299Z",
+    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
+    "category": "weather_type",
+    "condition": "clear",
+    "current_condition": null,
+    "status": "archived",
+    "specified_date": 1713888000,
+    "updated_at": "2024-04-17T17:40:23.471Z"
   }
 ]

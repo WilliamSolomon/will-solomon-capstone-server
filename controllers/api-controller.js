@@ -11,40 +11,40 @@ const weatherAPI_Key = process.env.weatherAPI_Key
 
 const registerNewUser = async (req, res) => {
     const { first_name, last_name, email, password, city, lat, lon } = req.body;
-    
+
     if (!first_name || !last_name || !email || !password) {
         return res.status(400).send("Please enter the required fields.");
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10); 
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
     const userId = uuidv4();
 
 
 
     const newUser = {
-        id: userId, 
+        id: userId,
         first_name,
         last_name,
         email,
         password: hashedPassword,
-        city, 
+        city,
         coord: {
             lon,
-            lat  
+            lat
         },
-        created_at: new Date().toISOString() 
+        created_at: new Date().toISOString()
     };
 
     try {
-        
+
         let userData = fs.readFileSync("./data/user-details.json");
         userData = JSON.parse(userData);
 
-        
+
         userData.push(newUser);
 
-        
+
         fs.writeFileSync("./data/user-details.json", JSON.stringify(userData, null, 2));
 
         res.status(201).send("Registered successfully");
@@ -63,7 +63,7 @@ const loginAuthenticate = async (req, res) => {
     }
 
     try {
-        
+
         let userData = fs.readFileSync("./data/user-details.json");
         userData = JSON.parse(userData);
 
@@ -74,25 +74,25 @@ const loginAuthenticate = async (req, res) => {
             return res.status(400).send("Invalid Email");
         }
 
-   
+
         const isPasswordCorrect = bcrypt.compareSync(password, user.password);
         if (!isPasswordCorrect) {
             return res.status(400).send("Invalid Password");
         }
 
- 
+
         const token = jwt.sign(
-            { 
-                id: user.id, 
+            {
+                id: user.id,
                 email: user.email,
                 city: user.city,
                 coord: user.coord
-            }, 
+            },
             process.env.JWT_KEY,
             { expiresIn: '365d' }
         );
 
-        
+
         res.json({ token });
     } catch (error) {
         console.error("Error:", error);
@@ -104,11 +104,11 @@ const loginAuthenticate = async (req, res) => {
 
 const getCurrentUser = async (req, res) => {
     try {
-        
+
         let userData = fs.readFileSync("./data/user-details.json");
         userData = JSON.parse(userData);
 
-     
+
         const user = userData.find(u => u.id === req.user.id);
 
         if (!user) {
@@ -123,7 +123,7 @@ const getCurrentUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     try {
-     
+
         let userData = fs.readFileSync("./data/user-details.json");
         userData = JSON.parse(userData);
 
@@ -144,10 +144,10 @@ const getCurrentWeather = async (req, res) => {
 
         const currentWeatherData = {
             user_id: userId,
-            weather: weatherData 
+            weather: weatherData
         };
 
-    
+
 
 
     } catch (error) {
@@ -169,7 +169,7 @@ const getForecastWeather = async (req, res) => {
 
         const forecastWeatherData = {
             user_id: userId,
-            weather: forecastData 
+            weather: forecastData
         };
 
         // logWeatherData(forecastWeatherData);
@@ -196,23 +196,6 @@ const logWeatherData = (weatherData) => {
     }
 };
 
-
-
-
-// const getAllUserAlerts = async (req, res) => {
-//     try {
-//         const userId = req.params.id;
-//         const alertsData = fs.readFileSync("./data/alert-details.json");
-//         const parsedData = JSON.parse(alertsData);
-
-//         //Filter for specific user
-//         const userAlerts = parsedData.filter(alert => alert.user_id === userId);
-
-//         res.status(200).json(userAlerts);
-//     } catch (err) {
-//         res.status(400).send(`Error retrieving user(${req.params.id}) alerts: ${err}`)
-//     }
-// }
 
 const getAllUserAlerts = async (req, res) => {
     try {
@@ -243,7 +226,7 @@ const addAlert = async (req, res) => {
         const updatedAlert = {
             id: newId,
             created_at: createdAt,
-            ...newAlert 
+            ...newAlert
         };
 
         let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
@@ -328,8 +311,6 @@ const getUserAlertSettings = async (req, res) => {
         res.status(400).send(`Error retrieving user(${req.params.id}) settings: ${err}`)
     }
 }
-
-
 
 
 const addAlertSetting = async (req, res) => {
