@@ -1,88 +1,23 @@
 [
   {
-    "id": "29b36e21-2f13-47ef-8c90-77933bbffff0",
-    "created_at": "2024-04-17T18:31:09.829Z",
-    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
-    "category": "Weather",
-    "condition": "Rain",
-    "status": "Active",
-    "specified_date": null,
-    "city": "Brooklyn, New York, US"
-  },
-  {
-    "id": "088571c6-7cb4-4404-b368-ec93ebb15eda",
-    "created_at": "2024-04-17T18:31:04.998Z",
-    "user_id": "e56fe9de-8b9c-48e0-9524-50aa993aefec",
-    "category": "Weather",
-    "condition": "Clear",
-    "status": "Active",
-    "specified_date": null,
-    "city": "Brooklyn, New York, US"
-  },
-  {
-    "id": "c4ac312a-a216-481f-aa1b-c3370504f48a",
-    "created_at": "2024-04-17T06:02:46.723Z",
-    "user_id": "1db286c8-76c7-43c0-aa75-369323c1ca54",
-    "category": "Weather",
-    "condition": "clouds",
-    "status": "Active",
-    "specified_date": null
-  },
-  {
-    "id": "b9a5d309-f29f-450c-bea1-74a608ccf666",
-    "created_at": "2024-04-17T06:02:37.409Z",
-    "user_id": "1db286c8-76c7-43c0-aa75-369323c1ca54",
-    "category": "Weather",
-    "condition": "Clear",
-    "status": "Active",
-    "specified_date": null
-  },
-  {
-    "id": "5b9006e8-0661-4818-8119-dc12a6030026",
-    "created_at": "2024-04-16T19:51:08.274Z",
-    "user_id": "2",
+    "id": "1",
+    "created_at": "2024-04-23T19:02:08.879Z",
+    "user_id": "1",
     "category": "Weather",
     "condition": "Thunderstorm",
-    "status": "Active",
-    "specified_date": null
-  },
-  {
-    "id": "2ceeec05-17e6-492d-9c58-e7a90930a462",
-    "created_at": "2024-04-16T18:00:31.194Z",
-    "user_id": "2",
-    "category": "Weather",
-    "condition": "clouds",
-    "status": "Active",
-    "specified_date": null
-  },
-  {
-    "id": "754a584b-dc62-47dc-b381-319076554b7a",
-    "created_at": "2024-04-16T18:00:24.386Z",
-    "user_id": "2",
-    "category": "Weather",
-    "condition": "Clear",
-    "status": "Active",
-    "specified_date": null
-  },
-  {
-    "id": "4deb243c-1150-428a-83a2-31ed4dfec8d1",
-    "created_at": "2024-04-16T05:15:16.266Z",
-    "user_id": "1",
-    "condition": "Rain",
-    "userId": "2",
-    "specified_date": null,
-    "category": "Weather",
-    "status": "Active"
-  },
-  {
-    "id": "0891d930-1417-42dc-b813-ba28e953377f",
-    "created_at": "2024-04-16T01:16:51.737Z",
-    "user_id": "1",
-    "condition": "Clouds",
-    "userId": "2",
-    "specified_date": null,
-    "category": "Weather",
     "status": "Disabled",
-    "updated_at": "2024-04-16T04:34:53.983Z"
+    "specified_date": null,
+    "city": "Brooklyn, New York, US",
+    "updated_at": "2024-04-23T20:12:32.109Z"
+  },
+  {
+    "id": "2",
+    "created_at": "2024-04-17T18:31:09.829Z",
+    "user_id": "1",
+    "category": "Weather",
+    "condition": "Rain",
+    "status": "Active",
+    "specified_date": null,
+    "city": "Brooklyn, New York, US"
   }
 ]
