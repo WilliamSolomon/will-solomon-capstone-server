@@ -39,7 +39,7 @@ router
 router
     .route("/alerts/:id/")
     .put(apiController.editAlert)
-    .delete(apiController.removeAlert)
+    .delete(apiController.archiveAlert)
 
 router
     .route("/settings/user/:id")
