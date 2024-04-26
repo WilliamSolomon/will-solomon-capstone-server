@@ -3,7 +3,9 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authorize = require('../middleware/authorize');
+// const { log } = require("console");
 const knex = require('knex')(require('../knexfile'));
+
 
 const currentWeatherAPI_URL = process.env.currentWeatherAPI_URL
 const forecastWeatherAPI_URL = process.env.forecastWeatherAPI_URL
@@ -103,6 +105,7 @@ const loginAuthenticate = async (req, res) => {
         const token = jwt.sign(
             {
                 id: user.id,
+                first_name: user.first_name,
                 email: user.email,
                 city: user.city,
                 coord: {
@@ -216,20 +219,11 @@ const logWeatherData = (weatherData) => {
 
 const getAllUserAlerts = async (req, res) => {
     try {
-        // const userId = req.params.id;
-        // const alertsData = fs.readFileSync("./data/alert-details.json");
-        // const parsedData = JSON.parse(alertsData);
-
-        // Filter for specific user
-        // const userAlerts = parsedData.filter(alert => alert.user_id === userId);
 
         const userAlerts = await knex("alerts")
-            .where({ user_id: req.params.id })
+            .where({ user_id: req.params.id, status: "active" });
 
-        // Filter for active alerts
-        const activeAlerts = userAlerts.filter(alert => alert.status === "active");
-
-        res.status(200).json(activeAlerts);
+        res.status(200).json(userAlerts);
     } catch (err) {
         res.status(400).send(`Error retrieving user(${req.params.id}) alerts: ${err}`)
     }
@@ -269,32 +263,19 @@ const editAlert = async (req, res) => {
         console.log("Alert ID", req.params.id);
         console.log("Updated Alert Data", updatedAlertData);
 
-        // let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
-
-        // Locate the index of the alert
-        // const alertIndex = alertsData.findIndex(alert => alert.id === alertId);
-
         const affectedRows = await knex("alerts")
-        .where({ id: alertId })
-        .update({
-            ...updatedAlertData,
-            updated_at: knex.fn.now() // Updates the field with current timestamp
-        })
+            .where({ id: alertId })
+            .update({
+                ...updatedAlertData,
+                updated_at: knex.fn.now() // Updates the field with current timestamp
+            })
 
         if (affectedRows === 0) {
             return res.status(404).send("Alert not found");
         }
 
-        // alertsData[alertIndex] = {
-        //     ...alertsData[alertIndex],
-        //     ...updatedAlertData,
-        //     updated_at: new Date().toISOString() // Update the updated_at field with current date and time
-        // };
-
-        // fs.writeFileSync("./data/alert-details.json", JSON.stringify(alertsData, null, 2));
-
         const updatedAlert = await knex("alerts")
-            .where({id: alertId})
+            .where({ id: alertId })
             .first();
 
         console.log("Updated Alert", updatedAlert);
@@ -305,47 +286,19 @@ const editAlert = async (req, res) => {
     }
 }
 
-// const archiveAlert = async (req, res) => {
-//     try {
-//         const alertId = req.params.id;
-
-//         // let alertsData = JSON.parse(fs.readFileSync("./data/alert-details.json"));
-
-//         // Locate alert with matching ID
-//         const alertIndex = alertsData.findIndex(alert => alert.id === alertId);
-
-//         const affectedRows = await knex("alerts")
-//             .where({id: alertId})
-//             .update
-
-//         if (alertIndex === -1) {
-//             return res.status(404).send("Alert not found");
-//         }
-
-//         // Remove the alert from the array. '1' specifies number of elements to remove
-//         alertsData.splice(alertIndex, 1);
-
-//         fs.writeFileSync("./data/alert-details.json", JSON.stringify(alertsData, null, 2));
-
-//         res.status(200).send("Alert deleted successfully");
-//     } catch (err) {
-//         res.status(400).send(`Error deleting alert: ${err}`);
-//     }
-// }
 
 const archiveAlert = async (req, res) => {
     try {
 
         console.log("Found the right function");
         const alertId = req.params.id;
-        // const updatedAlertData = req.body;
+
 
         // Update the alert status to "archived" in the database
         const affectedRows = await knex("alerts")
             .where({ id: alertId })
             .update({
                 status: "archived"
-                // updated_at: knex.fn.now() // Update the updated_at field with current date and time using Knex function
             });
 
         if (affectedRows === 0) {
@@ -361,45 +314,13 @@ const archiveAlert = async (req, res) => {
     }
 }
 
-// const archiveAlert = async (req, res) => {
-//     try {
-
-//         const alertId = req.params.id;
-
-
-//         console.log("Found the right function", alertId);
-//         // const updatedAlertData = req.body;
-
-//         // Update the alert status to "archived" in the database
-//         // const affectedRows = await knex("alerts")
-//         //     .where({ id: alertId })
-//         //     .update({
-//         //         status: "archived",
-//         //         updated_at: knex.fn.now() // Update the updated_at field with current date and time using Knex function
-//         //     });
-
-//         // if (affectedRows === 0) {
-//         //     return res.status(404).send("Alert not found");
-//         // }
-
-//         // Fetch the updated alert from the database
-//         // const updatedAlert = await knex("alerts").where({ id: alertId }).first();
-
-//         // res.status(200).json(alertId);
-//     } catch (err) {
-//         res.status(400).send(`Error archving alert: ${err}`);
-//     }
-// }
-
 
 const getUserAlertSettings = async (req, res) => {
     try {
         const userId = req.params.id;
-        const settingsData = fs.readFileSync("./data/settings-details.json");
-        const parsedData = JSON.parse(settingsData);
 
-        //Filter for specific user
-        const userSettings = parsedData.filter(setting => setting.user_id === userId);
+        const userSettings = await knex("settings")
+            .where({ user_id: userId })
 
         res.status(200).json(userSettings);
     } catch (err) {
@@ -410,52 +331,70 @@ const getUserAlertSettings = async (req, res) => {
 
 const addAlertSetting = async (req, res) => {
     try {
-        const newSetting = req.body;
 
-        const newId = uuidv4();
-        const createdAt = new Date().toISOString();
+        const { user_id, category, condition, status, specified_date, city } = req.body;
+        // const newSetting = req.body;
 
-        const updatedSetting = {
-            id: newId,
-            created_at: createdAt,
-            ...newSetting // Spread the remaining properties from newSetting object
-        };
+        // const newId = uuidv4();
+        // const createdAt = new Date().toISOString();
 
-        let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+        // const updatedSetting = {
+        //     id: newId,
+        //     created_at: createdAt,
+        //     ...newSetting // Spread the remaining properties from newSetting object
+        // };
 
-        settingData.unshift(updatedSetting);
+        const newSetting = await knex('settings')
+            .insert({
+                user_id, category, condition, status, specified_date, city
+            })
 
-        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2)); // null for no transformation, 2 for formatting output
+        // const userSettings = await knex("settings")
+        // .where({ user_id: user_id })
 
-        res.status(201).json(settingData);
+        // let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+
+        // settingData.unshift(updatedSetting);
+
+        // fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2)); // null for no transformation, 2 for formatting output
+
+        res.status(201).json(newSetting);
     } catch (err) {
-        res.status(400).send(`Error adding new alert: ${err}`);
+        res.status(400).send(`Error adding new alert setting: ${err}`);
     }
 }
 
 const getAlertSetting = async (req, res) => {
     try {
         const settingId = req.params.id;
-        const updatedSettingData = req.body;
+        // const updatedSettingData = req.body;
 
-        let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+        // let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
 
         // Locate the index of the alert
-        const settingIndex = settingData.findIndex(setting => setting.id === settingId);
+        // const settingIndex = settingData.findIndex(setting => setting.id === settingId);
 
-        if (settingIndex === -1) {
+        const userAlertSetting = await knex("settings")
+            .where({ id: settingId });
+
+
+
+        if (userAlertSetting === 0) {
             return res.status(404).send("Setting not found");
         }
 
-        settingData[settingIndex] = {
-            ...settingData[settingIndex],
-            ...updatedSettingData,
-            // updated_at: new Date().toISOString() // Update the updated_at field with current date and time
-        };
+        // settingData[settingIndex] = {
+        //     ...settingData[settingIndex],
+        //     ...updatedSettingData
+        //     // updated_at: new Date().toISOString() // Update the updated_at field with current date and time
+        // };
 
-        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2));
+        // fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2));
 
-        res.status(200).json(settingData[settingIndex]);
+        // res.status(200).json(settingData[settingIndex]);
+
+        // console.log("User Alert Settings", userAlertSetting);
+        res.status(200).json(userAlertSetting);
     } catch (err) {
         res.status(400).send(`Error editing alert: ${err}`);
     }
@@ -466,68 +405,90 @@ const editAlertSetting = async (req, res) => {
         const alertSettingId = req.params.id;
         const updatedSettingData = req.body;
 
-        let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+        console.log("Setting ID", req.params.id);
+        console.log("Updated Setting Data", updatedSettingData);
 
-        // Locate the index of the setting
-        const alertIndex = settingData.findIndex(alert => alert.id === alertSettingId);
+        const affectedRows = await knex("settings")
+            .where({ id: alertSettingId })
+            .update({
+                ...updatedSettingData
+                // updated_at: knex.fn.now() // Updates the field with current timestamp
+            })
 
-        if (alertIndex === -1) {
-            return res.status(404).send("Alert not found");
+        if (affectedRows === 0) {
+            return res.status(404).send("Setting not found");
         }
 
-        settingData[alertIndex] = {
-            ...settingData[alertIndex],
-            ...updatedSettingData,
-            updated_at: new Date().toISOString() // Update the updated_at field with current date and time
-        };
+        const updatedSetting = await knex("alerts")
+            .where({ id: alertSettingId })
+            .first();
 
-        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2));
 
-        res.status(200).json(settingData[alertIndex]);
+        res.status(200).json(updatedSetting);
+        // res.status(200).json(settingData[alertIndex]);
     } catch (err) {
-        res.status(400).send(`Error editing alert: ${err}`);
+        res.status(400).send(`Error editing alert setting: ${err}`);
     }
 }
+
+// const removeAlertSetting = async (req, res) => {
+//     try {
+//         const settingId = req.params.id;
+
+//         let settingsData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+
+//         // Locate setting with matching ID
+//         const settingIndex = settingsData.findIndex(setting => setting.id === settingId);
+
+//         if (settingIndex === -1) {
+//             return res.status(404).send("Alert not found");
+//         }
+
+//         // Remove the alert from the array. '1' specifies number of elements to remove
+//         settingsData.splice(settingIndex, 1);
+
+//         fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingsData, null, 2));
+
+//         res.status(200).send("Alert deleted successfully");
+//     } catch (err) {
+//         res.status(400).send(`Error deleting alert: ${err}`);
+//     }
+// }
 
 const removeAlertSetting = async (req, res) => {
     try {
         const settingId = req.params.id;
 
-        let settingsData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
+        // Delete the alert setting from the 'settings' table
+        const deletedRows = await knex('settings')
+            .where({ id: settingId })
+            .del();
 
-        // Locate setting with matching ID
-        const settingIndex = settingsData.findIndex(setting => setting.id === settingId);
-
-        if (settingIndex === -1) {
-            return res.status(404).send("Alert not found");
+        if (deletedRows === 0) {
+            return res.status(404).send("Alert setting not found");
         }
 
-        // Remove the alert from the array. '1' specifies number of elements to remove
-        settingsData.splice(settingIndex, 1);
-
-        fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingsData, null, 2));
-
-        res.status(200).send("Alert deleted successfully");
+        res.status(200).send("Alert setting deleted successfully");
     } catch (err) {
-        res.status(400).send(`Error deleting alert: ${err}`);
+        res.status(400).send(`Error deleting alert setting: ${err}`);
     }
 }
 
 
-const getUserData = async (req, res) => {
-    try {
-        const userId = req.params.id;
-        const userData = fs.readFileSync("./data/user-details.json");
-        const parsedData = JSON.parse(userData);
+// const getUserData = async (req, res) => {
+//     try {
+//         const userId = req.params.id;
+//         const userData = fs.readFileSync("./data/user-details.json");
+//         const parsedData = JSON.parse(userData);
 
-        //Filter for specific user
-        const userInfo = parsedData.filter(user => user.id === userId);
+//         //Filter for specific user
+//         const userInfo = parsedData.filter(user => user.id === userId);
 
-        res.status(200).json(userInfo);
-    } catch (err) {
-        res.status(400).send(`Error retrieving user(${req.params.id}) information: ${err}`)
-    }
-}
+//         res.status(200).json(userInfo);
+//     } catch (err) {
+//         res.status(400).send(`Error retrieving user(${req.params.id}) information: ${err}`)
+//     }
+// }
 
 
 module.exports = {
@@ -545,6 +506,6 @@ module.exports = {
     addAlertSetting,
     getAlertSetting,
     editAlertSetting,
-    removeAlertSetting,
-    getUserData
+    removeAlertSetting
+    // getUserData
 };

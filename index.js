@@ -28,7 +28,7 @@ app.listen(PORT, async () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 
     // Call generateAlertsForAllUsers function when the server starts
-    // await generateAlertsForAllUsers();
+    await generateAlertsForAllUsers();
 
     // Hourly cron job to run generateAlertsForAllUsers()
     cron.schedule('0 * * * *', async () => {
