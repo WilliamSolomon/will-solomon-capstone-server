@@ -36,7 +36,7 @@ app.listen(PORT, async () => {
 
         try {
             // Call generateAlertsForAllUsers function
-            await generateAlertsForAllUsers();
+            // await generateAlertsForAllUsers();
             console.log('generateAlertsForAllUsers() completed successfully.');
         } catch (error) {
             console.error('Error running generateAlertsForAllUsers():', error);

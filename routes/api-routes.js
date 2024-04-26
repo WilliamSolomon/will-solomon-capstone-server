@@ -39,7 +39,7 @@ router
 router
     .route("/alerts/:id/")
     .put(apiController.editAlert)
-    .delete(apiController.removeAlert)
+    .delete(apiController.archiveAlert)
 
 router
     .route("/settings/user/:id")
@@ -55,9 +55,9 @@ router
     .put(apiController.editAlertSetting)
     .delete(apiController.removeAlertSetting)
 
-router
-    .route("/users/:id")
-    .get(apiController.getUserData)
+// router
+//     .route("/users/:id")
+//     .get(apiController.getUserData)
 
 module.exports = router;
 
