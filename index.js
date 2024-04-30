@@ -5,6 +5,7 @@ const cron = require('node-cron');
 const { exec } = require('child_process');
 
 const generateAlertsForAllUsers = require('./utils/generateAlertsForAllUsers');
+const { cleanupExpiredAlerts } = require('./utils/cleanupExpiredAlerts');
 
 const PORT = process.env.PORT || 5050;
 
@@ -29,6 +30,7 @@ app.listen(PORT, async () => {
 
     // Call generateAlertsForAllUsers function when the server starts
     await generateAlertsForAllUsers();
+    await cleanupExpiredAlerts();
 
     // Hourly cron job to run generateAlertsForAllUsers()
     cron.schedule('0 * * * *', async () => {
@@ -36,30 +38,21 @@ app.listen(PORT, async () => {
 
         try {
             // Call generateAlertsForAllUsers function
-            // await generateAlertsForAllUsers();
+            await generateAlertsForAllUsers();
             console.log('generateAlertsForAllUsers() completed successfully.');
         } catch (error) {
             console.error('Error running generateAlertsForAllUsers():', error);
         }
     });
 
-    // Daily (00:00) cron job to run cleanupExpiredAlerts.js
-    cron.schedule('0 0 * * *', () => {
-        console.log('Running cleanupExpiredAlerts.js...');
-
-        // Execute the cleanupExpiredAlerts.js script
-        const child = exec('node cleanupExpiredAlerts.js');
-
-        child.stdout.on('data', (data) => {
-            console.log(data);
-        });
-
-        child.stderr.on('data', (data) => {
-            console.error(data);
-        });
-
-        child.on('close', (code) => {
-            console.log(`cleanupExpiredAlerts.js process exited with code ${code}`);
-        });
+    cron.schedule('1 0 * * *', async () => {
+        try {
+            await cleanupExpiredAlerts();
+        } catch (error) {
+            console.error('Error running cleanupExpiredAlerts:', error);
+        }
+    }, {
+        scheduled: true,
+        timezone: 'America/New_York'
     });
 });

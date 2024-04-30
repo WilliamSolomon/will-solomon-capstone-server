@@ -1,19 +1,25 @@
-const fs = require('fs');
+const knex = require('knex')(require('../knexfile'));
 
-// Load the alerts-detail.json file
-const alertsData = JSON.parse(fs.readFileSync('alerts-detail.json', 'utf8'));
+const cleanupExpiredAlerts = async () => {
+    try {
+        // Calculate the date for the previous day
+        const currentDate = new Date();
+        const previousDate = new Date(currentDate);
+        previousDate.setDate(previousDate.getDate() - 1);
 
-// Get the current date and time
-const currentDate = new Date();
+        // Convert previousDate to a Unix timestamp (number of seconds since January 1, 1970)
+        const previousDateUnixTimestamp = Math.floor(previousDate.getTime() / 1000);
 
-// Filter out entries where the specified_date has passed
-const filteredAlerts = alertsData.filter(alert => {
-    if (alert.specified_date) {
-        const specifiedDate = new Date(alert.specified_date);
-        return currentDate < specifiedDate;
+        // Delete alerts with specified_date from the previous day
+        const deletedRows = await knex('alerts')
+            .where('specified_date', '<', previousDateUnixTimestamp)
+            .del();
+
+        console.log(`${deletedRows} alerts deleted from the previous day.`);
+    } catch (error) {
+        console.error(`Error deleting previous day alerts: ${error}`);
     }
-    return true; // Keep entries with no specified_date
-});
+};
 
-// Write the filtered alerts back to the file
-fs.writeFileSync('alerts-detail.json', JSON.stringify(filteredAlerts, null, 2));
+
+module.exports = { cleanupExpiredAlerts };
