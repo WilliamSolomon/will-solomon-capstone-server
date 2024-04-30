@@ -3,7 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authorize = require('../middleware/authorize');
-// const { log } = require("console");
 const knex = require('knex')(require('../knexfile'));
 
 
@@ -36,51 +35,6 @@ const registerNewUser = async (req, res) => {
 
 }
 
-// const loginAuthenticate = async (req, res) => {
-//     const { email, password } = req.body;
-
-//     if (!email || !password) {
-//         return res.status(400).send("Please enter the required fields");
-//     }
-
-//     try {
-
-//         let userData = fs.readFileSync("./data/user-details.json");
-//         userData = JSON.parse(userData);
-
-
-//         const user = userData.find(u => u.email === email);
-
-//         if (!user) {
-//             return res.status(400).send("Invalid Email");
-//         }
-
-
-//         const isPasswordCorrect = bcrypt.compareSync(password, user.password);
-//         if (!isPasswordCorrect) {
-//             return res.status(400).send("Invalid Password");
-//         }
-
-
-//         const token = jwt.sign(
-//             {
-//                 id: user.id,
-//                 email: user.email,
-//                 city: user.city,
-//                 coord: user.coord
-//             },
-//             process.env.JWT_KEY,
-//             { expiresIn: '365d' }
-//         );
-
-
-//         res.json({ token });
-//     } catch (error) {
-//         console.error("Error:", error);
-//         res.status(500).send("Internal Server Error");
-//     }
-// }
-
 const loginAuthenticate = async (req, res) => {
     const { email, password } = req.body;
 
@@ -90,8 +44,6 @@ const loginAuthenticate = async (req, res) => {
 
     try {
         const user = await knex('user').where('email', email).first();
-
-        // console.log("User: ", user);
 
         if (!user) {
             return res.status(400).send("Invalid Email");
@@ -128,7 +80,6 @@ const loginAuthenticate = async (req, res) => {
 const getCurrentUser = async (req, res) => {
     try {
 
-        // console.log("Current User req", req.user);
         const user = await knex('user').where('id', req.user.id).first();
 
         if (!user) {
@@ -181,19 +132,14 @@ const getForecastWeather = async (req, res) => {
         const { lat, lon } = req.query;
         const { userId } = req.params;
         const response = await fetch(`${forecastWeatherAPI_URL}?lat=${lat}&lon=${lon}&exclude=hourly&appid=${weatherAPI_Key}&units=imperial`);
-        // https://api.openweathermap.org/data/3.0/onecall?lat=25.7743&lon=-80.1937&exclude=hourly&appid=a5a17f987e8d6c4387c94da7684f8979&units=imperial
         const forecastData = await response.json();
         res.json(forecastData);
-
-        // console.log("Forecast Data", forecastData);
 
         const forecastWeatherData = {
             user_id: userId,
             weather: forecastData
         };
 
-        // logWeatherData(forecastWeatherData);
-        logWeatherData(forecastData);
 
     } catch (error) {
         console.error(error);
@@ -202,19 +148,19 @@ const getForecastWeather = async (req, res) => {
 };
 
 
-// Log weather fetches to file
-const logWeatherData = (weatherData) => {
-    try {
-        let weatherDetails = JSON.parse(fs.readFileSync("./data/weather-details.json"));
-        weatherDetails.unshift(weatherData);
+// // Log weather fetches to file
+// const logWeatherData = (weatherData) => {
+//     try {
+//         let weatherDetails = JSON.parse(fs.readFileSync("./data/weather-details.json"));
+//         weatherDetails.unshift(weatherData);
 
-        // console.log("Weather Details", weatherDetails);
+//         // console.log("Weather Details", weatherDetails);
 
-        fs.writeFileSync("./data/weather-details.json", JSON.stringify(weatherDetails, null, 2));
-    } catch (error) {
-        console.error("Error logging weather data:", error);
-    }
-};
+//         fs.writeFileSync("./data/weather-details.json", JSON.stringify(weatherDetails, null, 2));
+//     } catch (error) {
+//         console.error("Error logging weather data:", error);
+//     }
+// };
 
 
 const getAllUserAlerts = async (req, res) => {
@@ -333,30 +279,11 @@ const addAlertSetting = async (req, res) => {
     try {
 
         const { user_id, category, condition, status, specified_date, city } = req.body;
-        // const newSetting = req.body;
-
-        // const newId = uuidv4();
-        // const createdAt = new Date().toISOString();
-
-        // const updatedSetting = {
-        //     id: newId,
-        //     created_at: createdAt,
-        //     ...newSetting // Spread the remaining properties from newSetting object
-        // };
 
         const newSetting = await knex('settings')
             .insert({
                 user_id, category, condition, status, specified_date, city
             })
-
-        // const userSettings = await knex("settings")
-        // .where({ user_id: user_id })
-
-        // let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
-
-        // settingData.unshift(updatedSetting);
-
-        // fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2)); // null for no transformation, 2 for formatting output
 
         res.status(201).json(newSetting);
     } catch (err) {
@@ -367,12 +294,6 @@ const addAlertSetting = async (req, res) => {
 const getAlertSetting = async (req, res) => {
     try {
         const settingId = req.params.id;
-        // const updatedSettingData = req.body;
-
-        // let settingData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
-
-        // Locate the index of the alert
-        // const settingIndex = settingData.findIndex(setting => setting.id === settingId);
 
         const userAlertSetting = await knex("settings")
             .where({ id: settingId });
@@ -383,17 +304,6 @@ const getAlertSetting = async (req, res) => {
             return res.status(404).send("Setting not found");
         }
 
-        // settingData[settingIndex] = {
-        //     ...settingData[settingIndex],
-        //     ...updatedSettingData
-        //     // updated_at: new Date().toISOString() // Update the updated_at field with current date and time
-        // };
-
-        // fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingData, null, 2));
-
-        // res.status(200).json(settingData[settingIndex]);
-
-        // console.log("User Alert Settings", userAlertSetting);
         res.status(200).json(userAlertSetting);
     } catch (err) {
         res.status(400).send(`Error editing alert: ${err}`);
@@ -412,7 +322,7 @@ const editAlertSetting = async (req, res) => {
             .where({ id: alertSettingId })
             .update({
                 ...updatedSettingData
-                // updated_at: knex.fn.now() // Updates the field with current timestamp
+
             })
 
         if (affectedRows === 0) {
@@ -423,37 +333,11 @@ const editAlertSetting = async (req, res) => {
             .where({ id: alertSettingId })
             .first();
 
-
         res.status(200).json(updatedSetting);
-        // res.status(200).json(settingData[alertIndex]);
     } catch (err) {
         res.status(400).send(`Error editing alert setting: ${err}`);
     }
 }
-
-// const removeAlertSetting = async (req, res) => {
-//     try {
-//         const settingId = req.params.id;
-
-//         let settingsData = JSON.parse(fs.readFileSync("./data/settings-details.json"));
-
-//         // Locate setting with matching ID
-//         const settingIndex = settingsData.findIndex(setting => setting.id === settingId);
-
-//         if (settingIndex === -1) {
-//             return res.status(404).send("Alert not found");
-//         }
-
-//         // Remove the alert from the array. '1' specifies number of elements to remove
-//         settingsData.splice(settingIndex, 1);
-
-//         fs.writeFileSync("./data/settings-details.json", JSON.stringify(settingsData, null, 2));
-
-//         res.status(200).send("Alert deleted successfully");
-//     } catch (err) {
-//         res.status(400).send(`Error deleting alert: ${err}`);
-//     }
-// }
 
 const removeAlertSetting = async (req, res) => {
     try {
