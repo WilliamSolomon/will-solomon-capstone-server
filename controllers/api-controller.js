@@ -95,8 +95,10 @@ const getCurrentUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
     try {
 
-        let userData = fs.readFileSync("./data/user-details.json");
-        userData = JSON.parse(userData);
+        const userData = await knex("user")
+            // .where({ user_id: req.params.id, status: "active" });
+
+        res.status(200).json(userAlerts);
 
         res.json(userData);
     } catch (error) {
@@ -108,18 +110,15 @@ const getAllUsers = async (req, res) => {
 const getCurrentWeather = async (req, res) => {
     try {
         const { lat, lon } = req.query;
-        const { userId } = req.params;
+        // const { userId } = req.params;
         const response = await fetch(`${currentWeatherAPI_URL}/weather?lat=${lat}&lon=${lon}&appid=${weatherAPI_Key}&units=imperial`);
         const weatherData = await response.json();
         res.json(weatherData);
 
         const currentWeatherData = {
-            user_id: userId,
+            // user_id: userId,
             weather: weatherData
         };
-
-
-
 
     } catch (error) {
         console.error(error);
@@ -130,13 +129,13 @@ const getCurrentWeather = async (req, res) => {
 const getForecastWeather = async (req, res) => {
     try {
         const { lat, lon } = req.query;
-        const { userId } = req.params;
+        // const { userId } = req.params;
         const response = await fetch(`${forecastWeatherAPI_URL}?lat=${lat}&lon=${lon}&exclude=hourly&appid=${weatherAPI_Key}&units=imperial`);
         const forecastData = await response.json();
         res.json(forecastData);
 
         const forecastWeatherData = {
-            user_id: userId,
+            // user_id: userId,
             weather: forecastData
         };
 
@@ -379,7 +378,7 @@ module.exports = {
     registerNewUser,
     loginAuthenticate,
     getCurrentUser,
-    getAllUsers,
+    // getAllUsers,
     getCurrentWeather,
     getForecastWeather,
     getAllUserAlerts,

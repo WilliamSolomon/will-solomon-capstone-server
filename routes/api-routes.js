@@ -17,16 +17,17 @@ router
         authorize,
         apiController.getCurrentUser)
 
-router
-    .route("/")
-        .get(
-            authorize,
-            apiController.getAllUsers)
+// router
+//     .route("/")
+//         .get(
+//             authorize,
+//             apiController.getAllUsers)
 
 router
-    .get("/weather/current/:userId", apiController.getCurrentWeather);
+    .get("/weather/current/", apiController.getCurrentWeather);
+
 router
-    .get("/weather/forecast/:userId", apiController.getForecastWeather);
+    .get("/weather/forecast/", apiController.getForecastWeather);
 
 router
     .route("/alerts/user/:id")

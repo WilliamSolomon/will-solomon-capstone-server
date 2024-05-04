@@ -15,12 +15,15 @@ const generateAlertsForAllUsers = async () => {
         // Retrieve user details from the 'users' table using Knex
         const users = await knex.select('id', 'latitude', 'longitude').from('user');
 
+        console.log("User Information", users);
 
         // Iterate over each user
         for (const user of users) {
             // const { id, coord: { lat, lon } } = user;
             // // Call generateAlerts function for each user
             // await generateAlerts(id, lat, lon);
+
+            console.log(`Working on user ${user.id}`);
 
             const { id, latitude, longitude } = user;
             // Call generateAlerts function for each user
