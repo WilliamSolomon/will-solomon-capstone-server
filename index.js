@@ -32,7 +32,7 @@ app.listen(PORT, async () => {
     await generateAlertsForAllUsers();
     await cleanupExpiredAlerts();
 
-    // Hourly cron job to run generateAlertsForAllUsers()
+    // Hourly cron job that creates weather alerts where applicable
     cron.schedule('0 * * * *', async () => {
         console.log('Running generateAlertsForAllUsers()...');
 
@@ -45,6 +45,7 @@ app.listen(PORT, async () => {
         }
     });
 
+    // Daily cron job to run that clears alerts that one day past today's date and thus, no longer relevant.
     cron.schedule('1 0 * * *', async () => {
         try {
             await cleanupExpiredAlerts();
