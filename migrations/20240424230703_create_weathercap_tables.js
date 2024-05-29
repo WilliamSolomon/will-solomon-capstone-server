@@ -25,10 +25,10 @@ exports.up = function (knex) {
                 .references("user.id")
                 .onUpdate("CASCADE")
                 .onDelete("CASCADE");
-            table.string("weather_type").notNullable();
             table.string("current_condition").notNullable();
             table.string("status").notNullable();
             table.integer("specified_date").notNullable();
+            table.string("category").notNullable();
         })
 
         .createTable("settings", (table) => {
